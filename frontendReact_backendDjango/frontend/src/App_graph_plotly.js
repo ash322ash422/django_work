@@ -1,19 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './App.css'; // Importing the CSS file
 
 function App() {
     const [z1Data, setZ1Data] = useState(null);
     const [file, setFile] = useState(null);
-    const [opacity, setOpacity] = useState(0.9); // Default opacity
-    const [userNumber, setUserNumber] = useState(''); // Store user input number
-    const [responseData, setResponseData] = useState(null); // Store server response
+    const [opacity, setOpacity] = useState(0.9);
+    const [userNumber, setUserNumber] = useState('');
+    const [responseData, setResponseData] = useState(null);
 
-    // Function to handle file selection
+    // File selection handler
     const handleFileChange = (event) => {
         setFile(event.target.files[0]);
     };
 
-    // Function to upload the selected file to the Django API
+    // File upload handler
     const uploadFile = async () => {
         if (!file) {
             alert("Please select a file first.");
@@ -25,9 +26,7 @@ function App() {
 
         try {
             const response = await axios.post('http://127.0.0.1:8000/api/upload-file/', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
+                headers: { 'Content-Type': 'multipart/form-data' },
             });
             alert("File uploaded successfully!");
         } catch (error) {
@@ -36,7 +35,7 @@ function App() {
         }
     };
 
-    // Function to fetch data when the "Fetch Data" button is clicked
+    // Data fetching handler
     const fetchData = async () => {
         if (!userNumber) {
             alert("Please enter a number.");
@@ -44,17 +43,15 @@ function App() {
         }
 
         try {
-            const response = await axios.post('http://127.0.0.1:8000/api/get-z1-data/', {
-                number: userNumber
-            });
+            const response = await axios.post('http://127.0.0.1:8000/api/get-z1-data/', { number: userNumber });
             setZ1Data(response.data.z1);
-            setResponseData(response.data); // Store the response data
+            setResponseData(response.data);
         } catch (error) {
             console.error("Error fetching z1 data:", error);
         }
     };
 
-    // Plotly rendering logic when z1Data is available
+    // Plot rendering logic
     const renderPlot = () => {
         if (z1Data && window.Plotly) {
             const z2 = z1Data.map(row => row.map(value => value + 1));
@@ -68,66 +65,67 @@ function App() {
         }
     };
 
-    // Re-render the plot whenever z1Data or opacity changes
-    React.useEffect(() => {
+    useEffect(() => {
         renderPlot();
     }, [z1Data, opacity]);
 
     return (
-        <div style={{ padding: "20px" }}>
-            <h1>3D Surface Plot with React and Django</h1>
-            
-            {/* File Upload Section */}
-            <div style={{ marginBottom: "20px" }}>
-                <input type="file" accept=".csv" onChange={handleFileChange} />
-                <button onClick={uploadFile}>Upload File</button>
-            </div>
+        <div className="container">
+            <div className="main-content">
+                <h1 className="title">3D Surface Plot with React and Django</h1>
 
-            {/* User Input Number Section */}
-            <div style={{ marginBottom: "20px" }}>
-                <label htmlFor="userNumber">Enter a number: </label>
-                <input
-                    id="userNumber"
-                    type="number"
-                    value={userNumber}
-                    onChange={(e) => setUserNumber(e.target.value)}
-                    style={{ marginLeft: "10px", width: "100px" }}
-                />
-            </div>
-
-            {/* Data Fetch Section */}
-            <div style={{ marginBottom: "20px" }}>
-                <button onClick={fetchData}>Fetch Data and Plot</button>
-            </div>
-
-            {/* Opacity Slider Section */}
-            <div style={{ marginBottom: "20px" }}>
-                <label htmlFor="opacity-slider">Select Opacity: {opacity}</label>
-                <input
-                    id="opacity-slider"
-                    type="range"
-                    min="0.0"
-                    max="1.0"
-                    step="0.1"
-                    value={opacity}
-                    onChange={(e) => setOpacity(parseFloat(e.target.value))}
-                    style={{ width: "300px", marginLeft: "10px" }}
-                />
-            </div>
-
-            {/* Server Response */}
-            {responseData && (
-                <div>
-                    <h3>Server Response:</h3>
-                    <p>Entered Number: {responseData.number}</p>
-                    <p>Data: {JSON.stringify(responseData.z1)}</p>
+                {/* File Upload Section */}
+                <div className="section">
+                    <h2 className="section-header">Upload CSV File</h2>
+                    <input type="file" accept=".csv" onChange={handleFileChange} className="file-input" />
+                    <button onClick={uploadFile} className="button">Upload File</button>
                 </div>
-            )}
 
-            {/* Plotly Container */}
-            <div id="plotDiv" style={{ width: '100%', height: '500px', marginTop: '20px' }}></div>
+                {/* User Number Input Section */}
+                <div className="section">
+                    <h2 className="section-header">Enter a Number</h2>
+                    <input
+                        type="number"
+                        value={userNumber}
+                        onChange={(e) => setUserNumber(e.target.value)}
+                        placeholder="Enter number"
+                        className="input-field"
+                    />
+                    <button onClick={fetchData} className="button">Fetch Data and Plot</button>
+                </div>
+
+                {/* Opacity Slider Section */}
+                <div className="section">
+                    <h2 className="section-header">Adjust Plot Opacity</h2>
+                    <label htmlFor="opacity-slider" style={{ marginRight: '10px' }}>Opacity: {opacity}</label>
+                    <input
+                        id="opacity-slider"
+                        type="range"
+                        min="0.0"
+                        max="1.0"
+                        step="0.1"
+                        value={opacity}
+                        onChange={(e) => setOpacity(parseFloat(e.target.value))}
+                        className="slider"
+                    />
+                </div>
+
+                {/* Server Response */}
+                {responseData && (
+                    <div className="section">
+                        <h3 className="section-header">Server Response</h3>
+                        <p>Entered Number: {responseData.number}</p>
+                        <p>Data: {JSON.stringify(responseData.z1)}</p>
+                    </div>
+                )}
+
+                {/* Plotly Container */}
+                <div id="plotDiv" className="plot-container"></div>
+            </div>
         </div>
-    );
+
+   );
 }
+
 
 export default App;
