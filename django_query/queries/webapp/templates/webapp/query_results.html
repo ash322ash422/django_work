@@ -1,0 +1,140 @@
+{% extends 'webapp/base.html' %}
+
+{% block extrastyle %}
+<style type="text/css">
+.dataframe thead:hover {
+    cursor: pointer;
+    cursor: hand;
+}
+</style>
+{% endblock %}
+
+{% block extrahead %}
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/static/webapp/css/bootstrap.min.css">
+  <script type="text/javascript" src="/static/webapp/js/jquery.min.js"></script>
+  <script src="/static/webapp/js/bootstrap.min.js"></script>
+{% endblock %}
+
+{% block content %} 
+<script type="text/javascript">
+    (function ($) {
+        $(function () { //Runs/invokes this on load.
+            var form = $('form')
+            $('#id_qn').change(function()  { form.trigger('submit'); });
+        });
+})( jQuery);
+</script>
+
+<script src="/static/webapp/js/jquery.tablesorter.min.js"></script>
+<script> 
+(function($) { 
+    $( function () {
+        $('.dataframe').tablesorter(); //WORKS
+    });
+})(jQuery);
+</script>
+
+<script type="text/javascript">
+    (function ($) {
+        
+        $(function () { //Runs/invokes this on load,
+            
+            $('#id_qid').focus(function() {
+                $(this).blur();
+                $(this).val(function(i,val) { return val.toUpperCase(); })
+            }); //end focus function
+      
+            var form_show = $('form_show')
+            $('#id_qn').change(function() {
+                form_show.trigger('submit');
+            });
+            
+            var src = $('#id_qry');
+            var dest = $('.class_qry');
+            src.change(function() { 
+                dest.val(src.val());
+                var submit_change = $("#id_submit_changes")
+                submit_change.css({'background': 'darkgreen', 'display': 'block'})
+                submit_change.fadeIn(600).fadeOut(400).fadeIn(600).fadeOut(400).fadeIn(600);
+            }); //end key up function
+             
+            $('.class_save_changes').click(function() {
+                var reply  = confirm("Are you sure you want to change this query?");
+                if (reply) {
+                    $(this).trigger('submit')
+                } 
+                else {
+                    return false;
+                }
+            });//end click function
+    });
+})(jQuery);
+</script>
+
+<table> 
+    <tr>
+        <td><h2>Query Results</h2></td>
+        <td align="right"><h4><strong>&nbsp;&nbsp;&nbsp;Query Name: {{qry_name}}</strong></h4></td>
+    </tr>
+
+</table>
+
+
+<table>
+    <tr>
+        <form class="form_show" action="{% url 'webapp:query' %}" method="POST">
+            {% csrf_token %}
+            <td>
+                {% for field in form %} <br />
+                    {{ field }}
+                {% endfor %} 
+            </td>
+            <td>
+                <button type="submit" class="btn btn-primary" value="Run">Run</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </td>
+        </form>
+
+        <!-- Following logic is used when user wants to download the results -->
+        <td> 
+            <form class="form_hidden" action="{% url 'webapp:download_query' %}" method="POST">
+                {% csrf_token %}
+                <p style="display:None">
+                    {{ form.qn.label_tag }} {{form.qn}}
+                    {{form.q.label_tag}} {{form.q}}
+                    {{form.qid.label_tag}} {{form.qid}}
+                </p>
+                <span id="id_download" style="color:white">&nbsp;&nbsp;&nbsp;
+                    <button class="class_download btn btn-primary" type="submit" value="Download">
+                        &nbsp;&nbsp;&nbsp;Download
+                    </button>
+                </span>
+            </form>
+        </td>
+
+        <td></td>
+    </tr>
+</table>
+
+<!-- Following logic is used when user edits and wants to save changes to the query -->
+<!-- This form is not seen by user -->
+<form class="form_hidden" action="{% url 'webapp:save_changes_query' %}" method="POST">
+    {% csrf_token %}
+    <p style="display:None">
+        {{ form.qn.label_tag }} {{form.qn}}
+        {{form.q.label_tag}} {{form.q}}
+        {{form.qid.label_tag}} {{form.qid}}
+    </p>
+    <p id="id_submit_changes" style="display:None; color:white">
+        This query has changed. Do you want to save it?
+        <button class="class_save_changes btn btn-primary" type="submit">Save Changes</button>
+    </p>
+</form>
+
+<strong>{{message}} </strong>
+{% autoescape off %}{{ df_html }}{% endautoescape %}
+
+{% endblock content %}
+    

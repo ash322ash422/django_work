@@ -1,0 +1,106 @@
+{% extends "core/base.html" %}
+{% load i18n static %}
+
+{% block content %}
+
+    <!-- ***** Main Banner Area Start ***** -->
+    <div class="page-heading" id="top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="inner-content">
+                        <h2>Single Product Page</h2>
+                        <span>Awesome &amp; Creative HTML CSS layout by TemplateMo</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ***** Main Banner Area End ***** -->
+
+
+    <!-- ***** Product Area Starts ***** -->
+    <section class="section" id="product">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="left-images">
+                        <img src="{% static 'core/assets/images/single-product-01.jpg' %}" alt="">
+                        <img src="{% static 'core/assets/images/single-product-02.jpg' %}" alt="">
+                    </div>
+                </div>
+            
+                <div class="col-lg-4">
+                <form action="{% url 'core:single-product' %}" method="POST">
+                        {% csrf_token %}
+                        
+                    <div class="right-content">
+                        <h4>{{item}}</h4>
+                        <input type="hidden" name="item" value="{{item}}"> <!-- hidden data to pass through form-->
+
+                        <span class="price">${{price}}</span>
+                        <input type="hidden" id="idprice" value="{{price}}" name="price" > <!-- hidden data to pass through form-->
+                        
+                        <ul class="stars">
+                            <li><i class="fa fa-star"></i></li>
+                            <li><i class="fa fa-star"></i></li>
+                            <li><i class="fa fa-star"></i></li>
+                            <li><i class="fa fa-star"></i></li>
+                            <li><i class="fa fa-star"></i></li>
+                        </ul>
+                        <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod kon tempor incididunt ut labore.</span>
+                        <div class="quote">
+                            <i class="fa fa-quote-left"></i><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiuski smod.</p>
+                        </div>
+                        <div class="quantity-content">
+                            <div class="left-content">
+                                <h6>No. of Orders</h6>
+                            </div>
+                            <div class="right-content">
+                                <div class="quantity buttons_added">
+                                    <input type="button" value="-" class="minus" onclick="compute_total()">
+                                    <input type="number" step="1" min="1" max="" name="quantity" value="1" 
+                                        title="Qty" class="input-text qty text" id="idqty" size="4" pattern="" inputmode="">
+                                    
+                                    <input type="button" value="+" class="plus" onclick="compute_total()">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="total">
+                            <h4>Total: $<div id="total-price">{{total_price}}</div></h4>
+                            <input type="hidden" id="hidden-total-price" value="{{total_price}}" name="total_price" > <!-- hidden data to pass through form-->
+                            <div class="main-border-button">
+                                <button type="submit" class="btn btn-primary" value="add_to_cart">Add To Cart</button>
+
+                                
+                            </div>
+                        </div>
+                    </div>
+                </form> 
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- ***** Product Area Ends ***** -->
+    
+{% endblock content %}
+
+{% block extra_script %}
+<script src="{% static 'core/assets/js/quantity.js' %}"></script>
+
+<script type="text/javascript">
+    function compute_total() {
+        var price = document.getElementById("idprice").value;
+        var qty = document.getElementById("idqty").value;
+        var total_price = Number(price) * Number(qty);
+        document.getElementById("total-price").innerHTML    = total_price ;
+        document.getElementById("hidden-total-price").value = total_price ;
+    }
+    
+    // run the task every .5 seconds
+    setInterval(compute_total, 500);
+</script>
+
+
+{% endblock extra_script %}

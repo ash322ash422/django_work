@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'notes/css/style.css' %}">
+    
+    <title>{% block title %}My site{% endblock %}</title>
+</head>
+
+<body>
+    <div id="sidebar">
+        {% block sidebar %}
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/blog/">Blog</a></li>
+        </ul>
+        {% endblock %}
+    </div>
+
+    <div id="content">
+        <img src="{% static 'notes/img/sample.jpg' %}" height="200">
+        {% block content %}{% endblock %}
+    </div>
+
+    {% block extra_body %}
+    {% endblock %}
+
+    {% include "notes/footer.html" %}
+    {% include "notes/scripts.html" %}
+
+    {% block extra_scripts %}
+    {% endblock extra_scripts %}
+
+</body>
+</html>

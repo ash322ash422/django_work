@@ -1,0 +1,10 @@
+Django==5.0.4
+Pillow==10.3.0 #Needed for models.ImageField()
+django-countries==7.6.1 # #Needed in models.py for CountryField(multiple=False)
+#NOTE: python-decouple advatange->store parameters in ini or .env files;define comprehensive default values;
+#have only one configuration module to rule all your instances.
+python-decouple==3.8
+django-allauth==0.61.1
+django-debug-toolbar==4.3.0
+#django-crispy-forms==2.0 # for this version  you need to  install crispy-bootstrap4 seperately
+django-crispy-forms==1.14.0 # No need to install crispy-bootstrap4 seperately b/c it get it is part of core packages.

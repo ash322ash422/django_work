@@ -1,0 +1,43 @@
+This is a simple application  that adds patients, edits the patient data and allows you to view list all patient created.
+
+To run this app follow these 3 steps:
+
+1)Run following 2 commands:
+
+PS C:\Users\hi\Desktop\projects\python_projects\docker_odoo15_postgresql_hospital> docker-compose build --no-cache
+PS C:\Users\hi\Desktop\projects\python_projects\docker_odoo15_postgresql_hospital> docker-compose up
+
+2) Goto 127.0.0.1:8069 ( not localhost:8069) and install the Hospital app. The menu would appear on  right hand side. 
+
+3) Click on the Hospital menu. You can create and edit patients. You can also see list of all patients.
+
+############################################################################################
+
+Extra Notes for 1st time login, on how to save DB and then restore DB:
+1) During creation of DB for 1st time I used following in 127.0.0.1:8069 (NOT in localhost:8069):
+Master Password=1111
+database name=dbtest
+email=ash@gmail.com
+Password=1111
+
+2) Initially , in 'Settings', you would not get the option to 'activate the developer mode'. The solution is install any one app, say 'Contacts'.
+3) Install Hospital App and create few records.
+
+4)Now create backup of DB (Make sure you are in 127.0.0.1:8069 URL and not in localhost:8069) : 
+Logout 
+-> on Login  page ( URL=http://127.0.0.1:8069/web/login ) click 'Manage DB' at the bottom.  This will take you to URL 'http://127.0.0.1:8069/web/database/manager'
+-> Next to DB 'dbtest', click backup button 
+->  Enter Master Password=1111
+ Databasename=dbtest
+ Backup format=zip
+
+ You will get file like dbtest_2024-09-08_03-10-19.zip in your download directory.
+
+Now you can go back to 'http://127.0.0.1:8069' or 'http://127.0.0.1:8069/web/login' to login.
+#############
+5) Now I deleted he container and its image. Then I ran 'docker-compose build --no-cache' and then 'docker-compose up'
+- Now if you goto URL=http://localhost:8069/, you will get 'Internal Server Error' message.
+- So go to URL=http://127.0.0.1:8069/web/database/selector and restore DB from here. Use the zip file that was saved in above step.
+  - Databse name=dbtest
+- Now goto URL=http://127.0.0.1:8069/web/login and login with previous email=ash@gmail.com, and Password=1111.
+You will see all your familiar records and everything.

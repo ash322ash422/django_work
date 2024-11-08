@@ -1,0 +1,27 @@
+{% extends 'webapp/base.html' %}
+
+{% block content %} 
+<script type="text/javascript" src="/static/webapp/js/jquery.min.js"></script>
+<script type="text/javascript">
+
+    (function ($) {
+        $( function () { //Runs/invokes this on load.
+            var form = $('form');
+            $('#id_qn').change(function() { form.trigger('submit'); });
+            });
+    })(jQuery);
+
+</script>
+
+<hi>Query</hl>
+<p class="lead"> Select your personal query.</p>
+
+<p>{% autoescape off %}{{message}}{% endautoescape %} </p>
+<p><strong>Pick your query.</strong></p>
+
+<form action="{% url 'webapp:query' %}" method="POST">
+    {% csrf_token %}
+    {{ form.qn.label_tag }} {{ form.qn }}
+</form>
+
+{% endblock content %}

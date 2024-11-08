@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if request.method == "GET" %}
+  <p>get</p>
+  <form action="." method="post" >
+    {% csrf_token %}
+      <button>Submit Payment</button>
+    
+</form>
+{% elif request.method == "POST" %} post request
+{% endif %}  
+              
+  
+{% endblock content %}
+

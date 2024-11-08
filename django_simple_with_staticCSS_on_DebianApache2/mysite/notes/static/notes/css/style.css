@@ -1,0 +1,11 @@
+/* Required height of parents of the Half Page Carousel for proper displaying carousel itself */
+html,
+body,
+.view {
+  height: 100%;
+  background-color: #9fb5c2; }
+
+/* Adjustment for mobile devices*/
+@media (max-width: 776px) {
+  .some_id {
+    height: 100%; } }

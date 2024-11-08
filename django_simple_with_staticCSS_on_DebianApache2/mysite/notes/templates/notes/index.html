@@ -1,0 +1,13 @@
+
+{% extends "notes/base.html" %}
+
+{% block title %}My notes page{% endblock %}
+
+{% block content %}
+<h1>Hello. You are in App: {{ app }}</h1>
+ 
+{% for n in notes_entries %}
+    <h2>{{ n.title }}</h2>
+    <p>{{ n.body }}</p>
+{% endfor %}
+{% endblock %}

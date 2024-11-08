@@ -1,0 +1,38 @@
+{% extends "webapp/base.html" %}
+
+{% block content %}
+<style type="text/css">
+    th: { text-transform: uppercase;
+          letter-spacing: 0.1em;
+          font-size: 90%;
+          border-bottom: 2px solid
+    }
+
+    tr:hover {border: 1px double green}
+</style>
+<script type="text/javascript" src="/static/webapp/js/jquery.min.js"></script>
+<script type="text/javascript">
+    (function ($) {
+        $(function () { //Runs/invokes this on load.
+            $("tr:odd").css("background","#efefe1")
+        });
+})( jQuery);
+</script>
+
+<h1>Queries</h1>
+<p>Date: {{ now|date }}</p>
+<table border=1 class="dataframe">
+    <th>Query Name</th> <th>Query </th> <th>Created By</th> <th>Number Of Visits</th>
+    {% for q in object_list %}
+    <tr> 
+        <td>{{q.qry_name}}</td><td>{% autoescape off %}{{q.qry}}{% endautoescape %}</td>
+        <td>{{q.create_by}}</td><td>{{q.num_visit}}</td>
+    </tr>
+    {% empty %}
+        <li>No queries yet</li>
+    {% endfor %}
+</table>
+{% endblock content %}
+    
+
+

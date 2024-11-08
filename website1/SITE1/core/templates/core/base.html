@@ -1,0 +1,219 @@
+{% load i18n static %}
+<!DOCTYPE html>
+{% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
+<html lang="{{ LANGUAGE_CODE|default:"en-us" }}" dir="{{ LANGUAGE_BIDI|yesno:'rtl,ltr,auto' }}">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+
+    <title>{% block title %}{{company_name}}{% endblock title %}</title>
+    {% block extra_head %}{% endblock extra_head %}
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" type="text/css" href="{% static 'core/assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'core/assets/css/font-awesome.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'core/assets/css/templatemo-hexashop.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'core/assets/css/owl-carousel.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'core/assets/css/lightbox.css' %}">
+    
+    {% block stylesheet %}{% endblock stylesheet %}
+
+
+<!--
+
+TemplateMo 571 Hexashop
+
+https://templatemo.com/tm-571-hexashop
+
+-->
+    </head>
+    
+    <body>
+    
+    <!-- ***** Preloader Start ***** -->
+    <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>  
+    <!-- ***** Preloader End ***** -->
+    
+    
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="index.html" class="logo">
+                            <img src="{% static 'core/assets/images/logo.png' %}">
+                        </a>
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav">
+                            <li class="scroll-to-section"><a href="{% url 'core:home' %}" class="active">Home</a></li>
+                            <li class="scroll-to-section"><a href="#cat1">category1</a></li>
+                            <li class="scroll-to-section"><a href="#cat2">category2</a></li>
+                            <li class="submenu">
+                                <a href="javascript:;">Pages</a>
+                                <ul>
+                                    <li><a href="{% url 'core:about' %}">About Us</a></li>
+                                    <li><a href="{% url 'core:products' %}">Products</a></li>
+                                    <li><a href="{% url 'core:single-product' %}">Single Product</a></li>
+                                    <li><a href="{% url 'core:contact' %}">Contact Us</a></li>
+                                </ul>
+                            </li>
+                            <li class="submenu">
+                                <a href="javascript:;">Features</a>
+                                <ul>
+                                    <li><a href="#">Features Page 1</a></li>
+                                    <li><a href="#">Features Page 2</a></li>
+                                    <li><a rel="nofollow" href="https://templatemo.com/page/4" target="_blank">Template Page 4</a></li>
+                                </ul>
+                            </li>
+                            
+                        </ul>        
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                        <!-- ***** Menu End ***** -->
+                    </nav>
+                </div>
+                
+            </div>
+            
+        </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
+    <br>
+
+    <div id="messages">    
+    {% if messages %}
+        <br><br><br> 
+        <ul class="messages" style="color:blue; text-align:center">
+        {% for message in messages %}
+        <li{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %} >{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    </div>
+
+
+    {% block content %}{% endblock content %}
+    
+    <!-- ***** Footer Start ***** -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="first-item">
+                        <div class="logo">
+                            <img src="{% static 'core/assets/images/white-logo.png' %}" alt="hexashop ecommerce templatemo">
+                        </div>
+                        <ul>
+                            <li><a href="#">{{ address }}</a></li>
+                            <li><a href="#">{{ email }}</a></li>
+                            <li><a href="#">{{ tel_no }}</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <h4>Shopping &amp; Categories</h4>
+                    <ul>
+                        <li><a href="#">Men’s Shopping</a></li>
+                        <li><a href="#">Women’s Shopping</a></li>
+                        <li><a href="#">Kid's Shopping</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3">
+                    <h4>Useful Links</h4>
+                    <ul>
+                        <li><a href="#">Homepage</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Help</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3">
+                    <h4>Help &amp; Information</h4>
+                    <ul>
+                        <li><a href="#">Help</a></li>
+                        <li><a href="#">FAQ's</a></li>
+                        <li><a href="#">Shipping</a></li>
+                        <li><a href="#">Tracking ID</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-12">
+                    <div class="under-footer">
+                        <p>Copyright © 2022 {{company_name}} All Rights Reserved. 
+                        
+                        <br>Design: <a href="https://templatemo.com" target="_parent" title="free css templates">TemplateMo</a></p>
+                        <ul>
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="#"><i class="fa fa-behance"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+
+    <!-- jQuery -->
+    <script src="{% static 'core/assets/js/jquery-2.1.0.min.js' %}"></script>
+    
+    <!-- Bootstrap -->
+    <script src="{% static 'core/assets/js/popper.js' %}"></script>
+    <script src="{% static 'core/assets/js/bootstrap.min.js' %}"></script>
+
+    <!-- Plugins -->
+    <script src="{% static 'core/assets/js/owl-carousel.js' %}"></script>
+    <script src="{% static 'core/assets/js/accordions.js' %}"></script>
+    <script src="{% static 'core/assets/js/datepicker.js' %}"></script>
+    <script src="{% static 'core/assets/js/scrollreveal.min.js' %}"></script>
+    <script src="{% static 'core/assets/js/waypoints.min.js' %}"></script>
+    <script src="{% static 'core/assets/js/jquery.counterup.min.js' %}"></script>
+    <script src="{% static 'core/assets/js/imgfix.min.js' %}"></script> 
+    <script src="{% static 'core/assets/js/slick.js' %}"></script> 
+    <script src="{% static 'core/assets/js/lightbox.js' %}"></script> 
+    <script src="{% static 'core/assets/js/isotope.js' %}"></script> 
+    
+    <!-- Global Init -->
+    <script src="{% static 'core/assets/js/custom.js' %}"></script>
+
+    <script>
+        $(function() {
+            var selectedClass = "";
+            $("p").click(function(){
+                selectedClass = $(this).attr("data-rel");
+                $("#portfolio").fadeTo(50, 0.1);
+                $("#portfolio div").not("."+selectedClass).fadeOut();
+                setTimeout(function() {
+                    $("."+selectedClass).fadeIn();
+                    $("#portfolio").fadeTo(50, 1);
+                }, 500);
+            });
+        });
+    </script>
+    
+    <script>
+        var message_ele = document.getElementById("messages");
+        
+        setTimeout(function(){ 
+           message_ele.style.display = "none"; 
+        }, 4000);
+    </script>
+    
+    {% block extra_script %}{% endblock extra_script %}
+
+  </body>
+</html>

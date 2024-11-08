@@ -1,0 +1,34 @@
+{% extends 'webapp/base.html' %}
+
+
+{% block extrastyle %}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/static/webapp/css/bootstrap.min.css">
+<script src="/static/webapp/js/jquery.min.js"></script>
+<script src="/static/webapp/js/bootstrap.bundle.min.js"></script>
+{% endblock %}
+
+
+
+{% block content %} 
+
+<form action="{% url 'webapp:add_query' %}" method="POST">
+{% csrf_token %}
+    
+ 
+{% for field in form %} 
+   {{ field.label_tag }} {{field}}
+     <br /><br/>
+{% endfor %}
+    
+    <button type="submit" class="btn btn-primary" value="add_query">Add Query</button>
+</form>
+
+{% endblock content %} 
+
+
+
+
+
+
