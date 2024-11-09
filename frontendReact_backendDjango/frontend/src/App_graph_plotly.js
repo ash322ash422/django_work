@@ -76,7 +76,7 @@ function App() {
 
                 {/* File Upload Section */}
                 <div className="section">
-                    <h2 className="section-header">Upload CSV File</h2>
+                    <h2 className="section-header">Upload CSV File (z1_data.csv)</h2>
                     <input type="file" accept=".csv" onChange={handleFileChange} className="file-input" />
                     <button onClick={uploadFile} className="button">Upload File</button>
                 </div>

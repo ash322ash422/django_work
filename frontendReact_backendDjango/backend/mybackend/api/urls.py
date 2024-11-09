@@ -1,5 +1,5 @@
 from django.urls import path
-from . import views
+from . import views, views_form
 from .views_up_down_load import FileUploadView, FileDownloadView
 from .views_graph_plotly  import Z1DataView
 
@@ -11,5 +11,7 @@ urlpatterns = [
     path('download-file/<str:filename>/', FileDownloadView.as_view(), name='file-download'),
     
     path('get-z1-data/', Z1DataView.as_view(), name='get-z1-data'),
+    
+     path('submit-form/', views_form.submit_form, name='submit_form'),
 ]
 
