@@ -1,0 +1,147 @@
+/* App.css */
+
+/* General styling for the app container */
+.app-container {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Title styling */
+h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Section styling */
+.section {
+    margin-top: 20px;
+}
+
+/* Label styling */
+label {
+    font-size: 14px;
+    color: #555;
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* Upload section styling */
+.upload-section {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.upload-section input[type="file"] {
+    margin-right: 10px;
+}
+
+/* Message for file upload status */
+.upload-message {
+    font-size: 14px;
+    color: #28a745;
+    margin-top: 8px;
+}
+
+/* Form styling */
+.form-container {
+    background-color: #fff;
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+input[type="number"],
+select {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 4px;
+    outline: none;
+}
+
+input[type="number"]:focus,
+select:focus {
+    border-color: #007bff;
+}
+
+/* Radio button and checkbox styling */
+.radio-group {
+    display: flex;
+    gap: 10px;
+}
+
+input[type="checkbox"] {
+    margin-right: 6px;
+}
+
+/* Submit button styling */
+.submit-button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+}
+
+/* Response data styling */
+.response-container {
+    background-color: #f1f1f1;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 20px;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+}
+
+.response-container pre {
+    font-size: 14px;
+    color: #333;
+}
+
+/* Slider section styling */
+.section-header {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.slider {
+    width: 100%;
+    margin-top: 5px;
+}
+
+/* Plotly container styling */
+.plot-container {
+    width: 100%;
+    height: 400px;
+    margin-top: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    background-color: #fff;
+    overflow: hidden;
+}

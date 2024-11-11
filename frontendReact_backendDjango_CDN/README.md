@@ -1,3 +1,5 @@
+Here I am using CDN for plotly (<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>) in index.html:
+
 SETUP steps for frontend react:
 
 1) Goto appropriate dir and type:
@@ -10,8 +12,6 @@ SETUP steps for frontend react:
 4) ..python_projects\frontendReact_backendDjango\frontend> npm install axios
 
 5) ..python_projects\frontendReact_backendDjango\frontend> npm install dotenv
-
-(Later, I also installed npm install plotly.js)
 
 6) create ..frontend/.env file and put variables in there
 
