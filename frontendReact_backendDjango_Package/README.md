@@ -1,4 +1,4 @@
-Here I am using CDN for plotly (<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>) in index.html:
+Here I am using package react-plotly, plotly.js for rendering the graph:
 
 SETUP steps for frontend react:
 
