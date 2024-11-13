@@ -1,0 +1,14 @@
+/* src/App.css */
+.app-container {
+    text-align: center;
+    padding: 20px;
+}
+
+.file-upload, .data-plot {
+    margin: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    margin-top: 10px;
+}

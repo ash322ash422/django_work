@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import api from './api';
+import Plot from 'react-plotly.js';
 import './App.css'; // Import the CSS file
 
 function App() {
@@ -12,10 +13,18 @@ function App() {
     const [downloadFileName, setDownloadFileName] = useState("");
     const [downloadLink, setDownloadLink] = useState(null);
 
+    // State to store plot data
+    const [plotData, setPlotData] = useState(null);
+
     const fetchData = async () => {
         try {
             const result = await api.get('get-data/');
             setGetData(result.data.message);
+            
+            // Assuming the fetched data includes x and y coordinates for plot
+            const xData = result.data.x || []; // Replace with actual data fields
+            const yData = result.data.y || []; // Replace with actual data fields
+            setPlotData({ x: xData, y: yData });
         } catch (error) {
             console.error("Error fetching data:", error);
         }
@@ -44,7 +53,7 @@ function App() {
         formData.append('file', file);
 
         try {
-            const response = await api.post('upload-file/', formData, {
+            const response = await api.post('upload-file_1/', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'Content-Disposition': `attachment; filename=${file.name}`,
@@ -73,13 +82,33 @@ function App() {
     return (
         <div className="container">
             <div className="main-content">
-                <h1 className="title">React & Django Example with POST/GET and File Upload/Download</h1>
+                <h1 className="title">React & Django Example with File Upload/Download and Plotly Chart</h1>
 
                 {/* Section to Fetch Data from Django */}
                 <div className="section">
                     <button onClick={fetchData} className="button">Fetch Data from Django</button>
                     {getData && <p className="response">Response: {getData}</p>}
                 </div>
+
+                {/* Plotly Chart */}
+                {plotData && (
+                    <div className="section">
+                        <h2 className="section-header">Data Visualization</h2>
+                        <Plot
+                            data={[
+                                {
+                                    x: plotData.x,
+                                    y: plotData.y,
+                                    type: 'scatter',
+                                    mode: 'lines+markers',
+                                    marker: { color: 'blue' },
+                                },
+                            ]}
+                            layout={{ title: 'Plotly Chart from Django Data' }}
+                            style={{ width: '100%', height: '400px' }}
+                        />
+                    </div>
+                )}
 
                 {/* Section to Send Data to Django */}
                 <div className="section">
@@ -121,8 +150,6 @@ function App() {
                         </a>
                     )}
                 </div>
-
-                
             </div>
         </div>
     );

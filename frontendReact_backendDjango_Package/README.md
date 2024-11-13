@@ -1,52 +1,18 @@
-Here I am using package react-plotly, plotly.js for rendering the graph:
+Here the react JS has 3 different applications:
 
-SETUP steps for frontend react:
-
-1) Goto appropriate dir and type:
-2) 
-..\frontendReact_backendDjango> npx create-react-app frontend 
-
-3) cd frontend 
+1) App1.js: Plot a graph based on data and CSV file received from user
    
+2) App2.js: Fetch data from django backend to plot, post data, upload / download file to django server
 
-4) ..python_projects\frontendReact_backendDjango\frontend> npm install axios
+3) App3.js: Here when user presses the button 'submit and plot', the server executes a shell script(main.py) whose output is directed to DB. The output is analysis-data and JSON-figure-data Then output from DB is read. The app has 2 buttons: one for retrieving analysis-data which is then used to render plot, and the other for retrieving JSON-figure-data which is also used to render plot. Note, that figure on frontend can also be generated using JSON-figure-data received from the server. 
 
-5) ..python_projects\frontendReact_backendDjango\frontend> npm install dotenv
+################################
 
-6) create ..frontend/.env file and put variables in there
+1) npm start
 
-7) create ..frontend/src/api.js file and put code in there
+This starts the react JS frontend
 
-8) ..python_projects\frontendReact_backendDjango\frontend> npm start
+2) python manage.py runserver
 
+This starts the Django backend server
 
-#######################################################
-
-SETUP steps for backend django:(You should know the basic working for django to understand this). I used python3.11 in virtual env.
-
-1) ..python_projects\frontendReact_backendDjango\backend> python -m pip install django
-
-2) ..python_projects\frontendReact_backendDjango\backend> python -m pip install djangorestframework django-cors-headers
-
-
-3) ..python_projects\frontendReact_backendDjango\backend> django-admin startproject mybackend 
-
-4) ..python_projects\frontendReact_backendDjango\backend\mybackend> python manage.py startapp api
-
-5) Now add code in settings.py, views.py, api/urls.py, mybackend/urls.py, etc file
-
-6) ..python_projects\frontendReact_backendDjango\backend\mybackend> python manage.py migrate
-
-##############################################
-
-To run 
-
-1) First run django server:
-
- python_projects\frontendReact_backendDjango\backend\mybackend> python manage.py runserver
-
-2)  Then run npm start:
-
-  ..python_projects\frontendReact_backendDjango\frontend> npm start
-
-3) Now open the browser(if it did not open auto.) and goto http://localhost:3000/ .

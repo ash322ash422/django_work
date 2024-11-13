@@ -148,3 +148,5 @@ CORS_ALLOW_HEADERS = [
 #Do not need this for this project
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploaded_files')
+
+DATA_DIR = os.path.join(BASE_DIR, 'Code_for_POC\Dummy_AW\MEM_data')
